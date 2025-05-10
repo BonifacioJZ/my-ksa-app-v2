@@ -14,17 +14,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
-from core import const
 
+from django.urls import path, include
+from ..views.presentation import PresentationCreateListView,PresentationRetrieveView,PresentationUpdateView,PresentationDeleteView
 urlpatterns = [
-    path(const.AUTH_URL, include('djoser.urls')),
-    path(const.AUTH_URL, include('djoser.urls.jwt')),
-    path(const.AUTH_URL, include('djoser.social.urls')),
-    path('admin/', admin.site.urls),
-    path(f"{const.BASE_URL}category/",include('src.product.urls.category')),
-    path(f"{const.BASE_URL}product/",include('src.product.urls.product')),
-    path(f"{const.BASE_URL}brand/",include('src.product.urls.brand')),
-    path(f"{const.BASE_URL}presentation/",include('src.product.urls.presentation')),
+    path('', PresentationCreateListView.as_view(), name='presentation-list-create'),
+    path('<slug:slug>/', PresentationRetrieveView.as_view(), name='presentation-detail'),
+    path('<slug:slug>/update/', PresentationUpdateView.as_view(), name='presentation-update'),
+    path('<slug:pk>/delete/', PresentationDeleteView.as_view(), name='presentation-delete'),
+    
 ]

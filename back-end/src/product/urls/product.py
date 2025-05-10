@@ -16,8 +16,11 @@ Including another URLconf
 """
 
 from django.urls import path, include
-from ..views.products import ProductListCreateView
+from ..views.product import ProductListCreateView,ProductDetailView,ProductUpdateView, ProductDeleteView
 
 urlpatterns = [
     path('', ProductListCreateView.as_view(), name='product-list'),
+    path('<slug:slug>/', ProductDetailView.as_view(), name='product-detail'),
+    path('<slug:slug>/update/', ProductUpdateView.as_view(), name='product-update'),
+    path('<slug:pk>/delete/', ProductDeleteView.as_view(), name='product-delete'),
 ]

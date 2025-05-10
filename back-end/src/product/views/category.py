@@ -1,6 +1,8 @@
 from rest_framework.generics import ListCreateAPIView,RetrieveAPIView,UpdateAPIView,DestroyAPIView
 from rest_framework.permissions import IsAuthenticated,AllowAny
 from ..serializers.category import CategoryListCreateSerializer,CategoryDetailSerializer,CategoryUpdateSerializer,CategoryDeleteSerializer
+from rest_framework.response import Response
+from rest_framework import status
 
 class CategoryListCreateView(ListCreateAPIView):
     """
@@ -103,7 +105,15 @@ class CategoryDeleteView(DestroyAPIView):
           de acceso, se debe descomentar y configurar con una clase de permisos
           adecuada, como `IsAuthenticated` para restringir el acceso a usuarios autenticados.
     """
-    # permission_classes = [IsAuthenticated]  # Configurar según los requisitos de acceso
+    # permission_classes = [IsAuthenticated, IsAdminUser]  # Configurar según los requisitos de acceso
     serializer_class = CategoryDeleteSerializer  # Serializador para manejar los datos
     queryset = CategoryUpdateSerializer.Meta.model.objects.all()  # Conjunto de datos
-    lookup_field = 'slug'  # Campo utilizado para buscar la categoría (por defecto es 'pk')
+    lookup_field = 'pk'  # Campo utilizado para buscar la categoría (por defecto es 'pk')
+    
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response(
+            {"detail": f"Marca '{instance.name}' eliminada correctamente."},
+            status=status.HTTP_200_OK
+        )
