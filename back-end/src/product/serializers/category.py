@@ -49,13 +49,3 @@ class CategoryDeleteSerializer(serializers.ModelSerializer):
             'name': {'required': True},
             'description': {'required': False},
         }
-
-class CategoryCreateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = ['id', 'name', 'description', 'slug', 'created_at', 'updated_at']
-        read_only_fields = ['id', 'slug', 'created_at', 'updated_at']
-        extra_kwargs = {
-            'name': {'required': True},
-            'description': {'required': False},
-        }

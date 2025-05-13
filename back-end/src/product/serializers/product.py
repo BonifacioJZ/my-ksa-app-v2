@@ -76,6 +76,7 @@ class ProductDetailSerializer(serializers.ModelSerializer):
         )
         read_only_fields = ('id', 'created_at', 'updated_at','slug',)
 
+
 class ProductUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:

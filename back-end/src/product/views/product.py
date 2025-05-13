@@ -2,6 +2,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveAPIView, UpdateAP
 from ..serializers.product import ProductListCreateSerializer,ProductDetailSerializer, ProductUpdateSerializer,ProductDeleteSerializer
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated,IsAuthenticatedOrReadOnly
 
 
 class ProductListCreateView(ListCreateAPIView):
@@ -28,7 +29,7 @@ class ProductListCreateView(ListCreateAPIView):
           de acceso, se debe descomentar y configurar con una clase de permisos 
           adecuada, como `IsAuthenticated` para restringir el acceso a usuarios autenticados.
     """
-    #permission_classes = []  # Configurar según los requisitos de acceso
+    permission_classes = [IsAuthenticatedOrReadOnly,]  # Configurar según los requisitos de acceso
     serializer_class = ProductListCreateSerializer  # Serializador para manejar los datos
     queryset = ProductListCreateSerializer.Meta.model.objects.select_related().all().prefetch_related() # Conjunto de datos
 
@@ -55,7 +56,7 @@ class ProductDetailView(RetrieveAPIView):
           de acceso, se debe descomentar y configurar con una clase de permisos
           adecuada, como `IsAuthenticated` para restringir el acceso a usuarios autenticados.
     """
-    #permission_classes = []  # Configurar según los requisitos de acceso
+    permission_classes = [IsAuthenticatedOrReadOnly,]  # Configurar según los requisitos de acceso
     serializer_class = ProductDetailSerializer  # Serializador para manejar los datos
     queryset = ProductDetailSerializer.Meta.model.objects.select_related().all() # Conjunto de datos
     lookup_field = 'slug'  # Campo utilizado para identificar el producto
@@ -83,7 +84,7 @@ class ProductUpdateView(UpdateAPIView):
           de acceso, se debe descomentar y configurar con una clase de permisos
           adecuada, como `IsAuthenticated` para restringir el acceso a usuarios autenticados.
     """
-    #permission_classes = []  # Configurar según los requisitos de acceso
+    permission_classes = [IsAuthenticatedOrReadOnly,]  # Configurar según los requisitos de acceso
     serializer_class = ProductUpdateSerializer  # Serializador para manejar los datos
     queryset = ProductUpdateSerializer.Meta.model.objects.select_related().all() # Conjunto de datos
     lookup_field = 'slug'  # Campo utilizado para identificar el producto
@@ -112,7 +113,7 @@ class ProductDeleteView(DestroyAPIView):
           de acceso, se debe descomentar y configurar con una clase de permisos
           adecuada, como `IsAuthenticated` para restringir el acceso a usuarios autenticados.
     """
-    #permission_classes = []  # Configurar según los requisitos de acceso
+    permission_classes = [IsAuthenticatedOrReadOnly,]  # Configurar según los requisitos de acceso
     serializer_class = ProductDeleteSerializer  # Serializador para manejar los datos
     queryset = ProductDeleteSerializer.Meta.model.objects.select_related().all() # Conjunto de datos
     lookup_field = 'pk'  # Campo utilizado para identificar el producto

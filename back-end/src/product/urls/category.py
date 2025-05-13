@@ -18,7 +18,7 @@ Including another URLconf
 from django.urls import path, include
 from ..views.category import CategoryListCreateView,CategoryRetrieveView,CategoryUpdateView,CategoryDeleteView
 urlpatterns = [
-    path('',CategoryListCreateView.as_view(), name='category-list'),
+    path('',CategoryListCreateView.as_view(), name='category-list-create'),
     path('<slug:slug>/', CategoryRetrieveView.as_view(), name='category-detail'),
     path('<slug:slug>/update/', CategoryUpdateView.as_view(), name='category-update'),
     path('<slug:pk>/delete/', CategoryDeleteView.as_view(), name='category-delete'),

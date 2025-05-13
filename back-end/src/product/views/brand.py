@@ -1,6 +1,7 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from ..serializers.brand import BrandCreateSerializer, BrandDetailSerializer, BrandUpdateSerializer, BrandDeleteSerializer
 
 
@@ -16,6 +17,7 @@ class BrandListCreateView(ListCreateAPIView):
         permission_classes (list): (Opcional) Especifica los permisos requeridos
             para acceder a esta vista. Descomentar y configurar según sea necesario.
     """
+    permission_classes = [IsAuthenticatedOrReadOnly,]
     serializer_class = BrandCreateSerializer
     queryset = BrandCreateSerializer.Meta.model.objects.all()
     # permission_classes = [IsAuthenticated,]
@@ -38,6 +40,7 @@ class BrandRetrieveApiView(RetrieveAPIView):
         permission_classes (list): (Opcional) Especifica los permisos requeridos
             para acceder a esta vista. Descomentar y configurar según sea necesario.
     """
+    permission_classes = [IsAuthenticatedOrReadOnly,]
     serializer_class = BrandDetailSerializer
     queryset = BrandDetailSerializer.Meta.model.objects.all().prefetch_related()
     lookup_field = 'slug'  # Campo utilizado para buscar la categoría (por defecto es 'pk')
@@ -60,6 +63,7 @@ class BrandUpdateApiView(UpdateAPIView):
         permission_classes (list): (Opcional) Especifica los permisos requeridos
             para acceder a esta vista. Descomentar y configurar según sea necesario.
     """
+    permission_classes = [IsAuthenticatedOrReadOnly,]
     serializer_class = BrandUpdateSerializer
     queryset = BrandUpdateSerializer.Meta.model.objects.all()
     lookup_field = 'slug'
@@ -82,6 +86,7 @@ class BrandDeleteApiView(DestroyAPIView):
         permission_classes (list): (Opcional) Especifica los permisos requeridos
             para acceder a esta vista. Descomentar y configurar según sea necesario.
     """
+    permission_classes = [IsAuthenticatedOrReadOnly,]
     serializer_class = BrandDeleteSerializer
     queryset = BrandDeleteSerializer.Meta.model.objects.all()
     lookup_field = 'pk'

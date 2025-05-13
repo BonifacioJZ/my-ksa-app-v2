@@ -2,6 +2,7 @@ from rest_framework.generics import ListCreateAPIView,RetrieveAPIView, UpdateAPI
 from ..serializers.presentation import PresentationListSerializer,PresentationDetailSerializer,PresentationUpdateSerializer,PresentationDeleteSerializer
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated,IsAuthenticatedOrReadOnly
 
 class PresentationCreateListView(ListCreateAPIView):
     """
@@ -14,6 +15,7 @@ class PresentationCreateListView(ListCreateAPIView):
         queryset (QuerySet): Define el conjunto de consultas que contiene todos los
             objetos de presentación que se recuperarán y listarán.
     """
+    permission_classes = [IsAuthenticatedOrReadOnly,]
     serializer_class = PresentationListSerializer
     queryset = PresentationListSerializer.Meta.model.objects.select_related().all()
     
@@ -30,6 +32,7 @@ class PresentationRetrieveView(RetrieveAPIView):
         lookup_field (str): Especifica el campo que se utilizará para buscar la
             presentación. En este caso, se utiliza 'slug' como campo de búsqueda.
     """
+    permission_classes = [IsAuthenticatedOrReadOnly,]
     serializer_class = PresentationDetailSerializer
     queryset = PresentationDetailSerializer.Meta.model.objects.select_related().all()
     lookup_field = 'slug'  # Campo utilizado para buscar la presentación (por defecto es 'pk')
@@ -48,6 +51,7 @@ class PresentationUpdateView(UpdateAPIView):
         lookup_field (str): Especifica el campo que se utilizará para buscar la
             presentación. En este caso, se utiliza 'slug' como campo de búsqueda.
     """
+    permission_classes = [IsAuthenticatedOrReadOnly,]
     serializer_class = PresentationUpdateSerializer
     queryset = PresentationUpdateSerializer.Meta.model.objects.select_related().all()
     lookup_field = 'slug'  # Campo utilizado para buscar la presentación (por defecto es 'pk')
@@ -66,6 +70,7 @@ class PresentationDeleteView(DestroyAPIView):
         lookup_field (str): Especifica el campo que se utilizará para buscar la
             presentación. En este caso, se utiliza 'slug' como campo de búsqueda.
     """
+    permission_classes = [IsAuthenticatedOrReadOnly,]
     serializer_class = PresentationDeleteSerializer
     queryset = PresentationDeleteSerializer.Meta.model.objects.select_related().all()
     lookup_field = 'pk'  # Campo utilizado para buscar la presentación (por defecto es 'pk')

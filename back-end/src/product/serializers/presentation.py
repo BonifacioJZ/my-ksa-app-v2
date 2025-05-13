@@ -63,6 +63,30 @@ class PresentationDetailSerializer(serializers.ModelSerializer):
             'updated_at',
         )
         read_only_fields = ('id', 'slug', 'created_at', 'updated_at',)
+        
+class PresentationSearchSerializer(serializers.ModelSerializer):
+    """
+    Serializador para la recuperación de detalles de una presentación.
+    """
+    product_detail = ProductPresentationSerializer(source="product",read_only=True)
+    
+    class Meta:
+        model = Presentation
+        fields = (
+            'id', 
+            'sku',
+            'name',
+            'stock',
+            'bar_code',
+            'abbreviation',
+            'product',
+            'product_detail',
+            'price', 
+            'slug',
+            'created_at', 
+            'updated_at',
+        )
+        read_only_fields = ('id', 'slug', 'created_at', 'updated_at',)
 
 class PresentationUpdateSerializer(serializers.ModelSerializer):
     """

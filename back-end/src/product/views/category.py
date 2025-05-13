@@ -1,5 +1,5 @@
 from rest_framework.generics import ListCreateAPIView,RetrieveAPIView,UpdateAPIView,DestroyAPIView
-from rest_framework.permissions import IsAuthenticated,AllowAny
+from rest_framework.permissions import IsAuthenticated,IsAuthenticatedOrReadOnly
 from ..serializers.category import CategoryListCreateSerializer,CategoryDetailSerializer,CategoryUpdateSerializer,CategoryDeleteSerializer
 from rest_framework.response import Response
 from rest_framework import status
@@ -28,7 +28,7 @@ class CategoryListCreateView(ListCreateAPIView):
           de acceso, se debe descomentar y configurar con una clase de permisos 
           adecuada, como `IsAuthenticated` para restringir el acceso a usuarios autenticados.
     """
-    # permission_classes = [IsAuthenticated]  # Configurar según los requisitos de acceso
+    permission_classes = [IsAuthenticatedOrReadOnly,]  # Configurar según los requisitos de acceso
     serializer_class = CategoryListCreateSerializer  # Serializador para manejar los datos
     queryset = CategoryListCreateSerializer.Meta.model.objects.select_related().all()  # Conjunto de datos
 
@@ -55,7 +55,7 @@ class CategoryRetrieveView(RetrieveAPIView):
           de acceso, se debe descomentar y configurar con una clase de permisos 
           adecuada, como `IsAuthenticated` para restringir el acceso a usuarios autenticados.
     """
-    # permission_classes = [IsAuthenticated]  # Configurar según los requisitos de acceso
+    permission_classes = [IsAuthenticatedOrReadOnly,]  # Configurar según los requisitos de acceso
     serializer_class = CategoryDetailSerializer  # Serializador para manejar los datos
     queryset = CategoryDetailSerializer.Meta.model.objects.all().prefetch_related()  # Conjunto de datos
     lookup_field = 'slug'  # Campo utilizado para buscar la categoría (por defecto es 'pk')
@@ -84,6 +84,7 @@ class CategoryUpdateView(UpdateAPIView):
           adecuada, como `IsAuthenticated` para restringir el acceso a usuarios autenticados.
     """
     # permission_classes = [IsAuthenticated]  # Configurar según los requisitos de acceso
+    permission_classes = [IsAuthenticatedOrReadOnly,]
     serializer_class = CategoryUpdateSerializer  # Serializador para manejar los datos
     queryset = CategoryUpdateSerializer.Meta.model.objects.all()  # Conjunto de datos
     lookup_field = 'slug'  # Campo utilizado para buscar la categoría (por defecto es 'pk')
@@ -106,6 +107,7 @@ class CategoryDeleteView(DestroyAPIView):
           adecuada, como `IsAuthenticated` para restringir el acceso a usuarios autenticados.
     """
     # permission_classes = [IsAuthenticated, IsAdminUser]  # Configurar según los requisitos de acceso
+    permission_classes = [IsAuthenticatedOrReadOnly,]
     serializer_class = CategoryDeleteSerializer  # Serializador para manejar los datos
     queryset = CategoryUpdateSerializer.Meta.model.objects.all()  # Conjunto de datos
     lookup_field = 'pk'  # Campo utilizado para buscar la categoría (por defecto es 'pk')
