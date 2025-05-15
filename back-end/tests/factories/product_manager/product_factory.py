@@ -10,8 +10,6 @@ class ProductFactory:
         return Product.objects.create(
             name="Product Name",
             description="Product Description",
-            price=100.0,
-            stock=10,
             category=CategoryFactory().build_category(),
             brand=BrandFactory().build_brand(),
         )
@@ -22,8 +20,6 @@ class ProductFactory:
         return {
             "name": "Product Name",
             "description": "Product Description",
-            "price": 100.0,
-            "stock": 10,
             "category": CategoryFactory().build_category().id,
             "brand": BrandFactory().build_brand().id,
         }
@@ -34,8 +30,6 @@ class ProductFactory:
         return {
             "name": "",
             "description": "Product Description",
-            "price": -100.0,
-            "stock": -10,
             "category": CategoryFactory().build_category().id,
             "brand": BrandFactory().build_brand().id,
         }
@@ -46,8 +40,6 @@ class ProductFactory:
         return {
             "name": "Product Name",
             "description": "Product Description",
-            "price": 100.0,
-            "stock": 10,
             "category": "invalid-category",
             "brand": "invalid-brand",
         }
@@ -58,8 +50,6 @@ class ProductFactory:
         return {
             "name": "Product Name",
             "description": "Product Description",
-            "price": 100.0,
-            "stock": 10,
             "category": CategoryFactory().build_category().id,
             "brand": "invalid-brand",
         }
@@ -70,8 +60,6 @@ class ProductFactory:
         return {
             "name": "Product Name",
             "description": "Product Description",
-            "price": -100.0,
-            "stock": -10,
             "category": CategoryFactory().build_category().id,
             "brand": BrandFactory().build_brand().id,
         }

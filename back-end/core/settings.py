@@ -43,7 +43,8 @@ DJANGO_APPS =[
 ]
 LOCAL_APPS = [
     'src.user',
-    'src.product'
+    'src.product',
+    'src.cart',
 ]
 THIRTY_PARTY = [
     'rest_framework',

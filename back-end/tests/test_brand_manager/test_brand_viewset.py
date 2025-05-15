@@ -7,22 +7,21 @@ from ..factories.brand_manager.brand_factory import BrandFactory
 class BrandTestCase(TestSetUp):
     def test_find_brand(self):
         """
-        Test the find brand endpoint.
+        Prueba el endpoint para encontrar una marca.
         """
         brand = BrandFactory().build_brand()
         response = self.client.get(
-            reverse("brand-detail",kwargs={"slug": brand.slug}),
+            reverse("brand-detail", kwargs={"slug": brand.slug}),
             format="json",
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        
         self.assertEqual(response.data['id'], str(brand.id))
         self.assertEqual(response.data['name'], brand.name)
         self.assertEqual(response.data['slug'], brand.slug)
         
     def test_find_brand_not_found(self):
         """
-        Test the find brand endpoint with a non-existent brand.
+        Prueba el endpoint para encontrar una marca que no existe.
         """
         response = self.client.get(
             reverse("brand-detail", kwargs={"slug": "non-existent-brand"}),
@@ -32,7 +31,7 @@ class BrandTestCase(TestSetUp):
     
     def test_create_brand(self):
         """
-        Test the create brand endpoint.
+        Prueba el endpoint para crear una marca.
         """
         brand_data = BrandFactory().build_brand_JSON()
         response = self.client.post(
@@ -45,7 +44,7 @@ class BrandTestCase(TestSetUp):
     
     def test_create_brand_invalid(self):
         """
-        Test the create brand endpoint with invalid data.
+        Prueba el endpoint para crear una marca con datos inválidos.
         """
         brand_data = BrandFactory().build_brand_JSON()
         brand_data['name'] = ''
@@ -59,7 +58,7 @@ class BrandTestCase(TestSetUp):
         
     def test_update_brand(self):
         """
-        Test the update brand endpoint.
+        Prueba el endpoint para actualizar una marca.
         """
         brand = BrandFactory().build_brand()
         updated_data = {
@@ -78,7 +77,7 @@ class BrandTestCase(TestSetUp):
         
     def test_update_brand_not_found(self):
         """
-        Test the update brand endpoint with a non-existent brand.
+        Prueba el endpoint para actualizar una marca que no existe.
         """
         updated_data = {
             "name": "Updated Brand Name",
@@ -89,9 +88,10 @@ class BrandTestCase(TestSetUp):
             format="json",
         )
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+        
     def test_delete_brand(self):
         """
-        Test the delete brand endpoint.
+        Prueba el endpoint para eliminar una marca.
         """
         brand = BrandFactory().build_brand()
         response = self.client.delete(
@@ -104,7 +104,7 @@ class BrandTestCase(TestSetUp):
             brand.refresh_from_db()
     def test_delete_brand_not_found(self):
         """
-        Test the delete brand endpoint with a non-existent brand.
+        Prueba el endpoint para eliminar una marca que no existe.
         """
         response = self.client.delete(
             reverse("brand-delete", kwargs={"pk": "non-existent-brand"}),

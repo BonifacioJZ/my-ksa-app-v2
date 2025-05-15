@@ -1,7 +1,7 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-
+from src.cart.models.cart import Cart
 """The UserAccountManager class is responsible for creating user accounts and superuser accounts,
     including setting their email, password, and additional fields, and saving them to the database.
     """
@@ -15,8 +15,8 @@ class UserAccountManager(BaseUserManager):
 
         user.set_password(password)
         user.save()
-        
-        
+        shopping_cart = Cart.objects.create(user=user)
+        shopping_cart.save()        
         return user
 
     

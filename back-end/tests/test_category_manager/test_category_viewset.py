@@ -6,7 +6,7 @@ from ..factories.category_manager.category_factory import CategoryFactory
 class CategoryTestCase(TestSetUp):
     def test_find_category(self):
         """
-        Test the find category endpoint.
+        Prueba el endpoint para encontrar una categoría.
         """
         category = CategoryFactory().build_category()
         response = self.client.get(
@@ -21,7 +21,7 @@ class CategoryTestCase(TestSetUp):
         
     def test_find_category_not_found(self):
         """
-        Test the find category endpoint with a non-existent category.
+        Prueba el endpoint para encontrar una categoría que no existe.
         """
         response = self.client.get(
             reverse("category-detail", kwargs={"slug": "non-existent-category"}),
@@ -31,7 +31,7 @@ class CategoryTestCase(TestSetUp):
     
     def test_create_category(self):
         """
-        Test the create category endpoint.
+        Prueba el endpoint para crear una categoría.
         """
         category_data = CategoryFactory().build_category_JSON()
         response = self.client.post(
@@ -45,7 +45,7 @@ class CategoryTestCase(TestSetUp):
         
     def test_create_category_invalid(self):
         """
-        Test the create category endpoint with invalid data.
+        Prueba el endpoint para crear una categoría con datos inválidos.
         """
         category_data = CategoryFactory().build_category_JSON()
         category_data['name'] = ''
@@ -58,7 +58,7 @@ class CategoryTestCase(TestSetUp):
         
     def test_update_category(self):
         """
-        Test the update category endpoint.
+        Prueba el endpoint para actualizar una categoría.
         """
         category = CategoryFactory().build_category()
         updated_data = {
@@ -73,9 +73,10 @@ class CategoryTestCase(TestSetUp):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['name'], updated_data['name'])
         self.assertEqual(response.data['description'], updated_data['description'])
+        
     def test_update_category_not_found(self):
         """
-        Test the update category endpoint with a non-existent category.
+        Prueba el endpoint para actualizar una categoría que no existe.
         """
         updated_data = {
             "name": "Updated Category Name",
@@ -90,7 +91,7 @@ class CategoryTestCase(TestSetUp):
     
     def test_delete_category(self):
         """
-        Test the delete category endpoint.
+        Prueba el endpoint para eliminar una categoría.
         """
         category = CategoryFactory().build_category()
         response = self.client.delete(
@@ -104,7 +105,7 @@ class CategoryTestCase(TestSetUp):
 
     def test_delete_category_not_found(self):
         """
-        Test the delete category endpoint with a non-existent category.
+        Prueba el endpoint para eliminar una categoría que no existe.
         """
         response = self.client.delete(
             reverse("category-delete", kwargs={"pk": 999}),
