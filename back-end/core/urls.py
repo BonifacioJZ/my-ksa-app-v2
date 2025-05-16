@@ -27,4 +27,5 @@ urlpatterns = [
     path(f"{const.BASE_URL}product/",include('src.product.urls.product')),
     path(f"{const.BASE_URL}brand/",include('src.product.urls.brand')),
     path(f"{const.BASE_URL}presentation/",include('src.product.urls.presentation')),
+    path(f"{const.BASE_URL}cart/",include('src.cart.urls.cart')),
 ]

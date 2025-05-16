@@ -1,0 +1,33 @@
+@hostname = 127.0.0.1
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ4MDMwMzMxLCJpYXQiOjE3NDc0MjU1MzEsImp0aSI6IjY0ZTVkZGExNTQ3NDRlNWZhMWI4YzIzMzRlYTdlNDFjIiwidXNlcl9pZCI6ImJiMDQ2YjgzLWFlY2YtNGM0NC1hZGUwLTIyNjNhNWQzZTkzZSJ9.2BfzRmXEmyRv69qI-sWly4NIpaqJVsRq86uaIDJLt9Q
+@refresh_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MDAxNzUzMSwiaWF0IjoxNzQ3NDI1NTMxLCJqdGkiOiJiNjUyYjQ1ZGQxOTU0N2FjODQzMDRlNTEyYTE4NWFmZCIsInVzZXJfaWQiOiJiYjA0NmI4My1hZWNmLTRjNDQtYWRlMC0yMjYzYTVkM2U5M2UifQ.m87iVzeFvCDXsAZ6HrdVRScOBe6CLO5nqb8w7r80XnU
+@username = Bonifacio
+@password = Ghost6699
+@port = 8000
+@path = api/v1/
+@base_url = http://{{hostname}}:{{port}}/{{path}}
+
+###
+POST {{base_url}}auth/jwt/create/
+Content-Type: application/json
+
+{
+    "username": "{{username}}",
+    "password": "{{password}}"
+}
+
+###
+GET {{base_url}}category/
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+GET {{base_url}}category/maquina-para-jardineria-y-agricultura-ea5aace3/
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Cart
+GET  {{base_url}}cart/
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
