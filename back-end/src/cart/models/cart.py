@@ -7,7 +7,6 @@ from src.product.models.presentation import Presentation
 class Cart(models.Model):
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="user", on_delete=models.CASCADE)
-    total_items = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -17,12 +16,12 @@ class Cart(models.Model):
         ordering = ['-created_at']
     
     def __str__(self):
-        return f"Carrito de {self.user.username} - {self.total_items} productos"
+        return f"Carrito de {self.user.username} - {self.id}"
     
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, related_name='items', on_delete=models.CASCADE)
     presentation = models.ForeignKey(Presentation,related_name="presentation",on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
+    quantity = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     class Meta:

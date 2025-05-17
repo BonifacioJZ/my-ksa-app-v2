@@ -16,8 +16,10 @@ Including another URLconf
 """
 
 from django.urls import path
-from ..views.cart import CartDetailView
+from ..views.cart import CartDetailView,AddToCartView,RemoveToCartView,CleanCartView
 urlpatterns = [
     path('', CartDetailView.as_view(), name='cart-detail'),
-    
+    path('add/', AddToCartView.as_view(), name='add-to-cart'),
+    path('remove/<int:pk>/', RemoveToCartView.as_view(), name='remove-to-cart'),
+    path('clean/', CleanCartView.as_view(), name='clean-cart'),
 ]

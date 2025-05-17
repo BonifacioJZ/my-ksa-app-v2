@@ -38,30 +38,24 @@ class CartItemSerializer(serializers.ModelSerializer):
     """
     Serializador para los items del carrito.
     """
-    presentation = PresentationSerializer(source="presentation",read_only=True)
-    total = serializers.SerializerMethodField(method_name='total')
+    presentation_details = PresentationSerializer(source="presentation",read_only=True)
+    total = serializers.SerializerMethodField(method_name='total_item')
     
     class Meta:
         model = CartItem
-        fields = ('id', 'presentation' 'quantity', 'total',)
+        fields = ('id', 'presentation','presentation_details', 'quantity', 'total',)
         read_only_fields = ('id',)
     
-    def total(self,cart_item:CartItem):
+    def total_item(self,cart_item:CartItem):
         """
         Calcula el total del item en el carrito.
         """
         return cart_item.presentation.price * cart_item.quantity
-    def to_representation(self, instance: CartItem):
-        """
-        Serializa el objeto CartItem.
-        """
-        representation = super().to_representation(instance)
-        representation['total'] = self.total(instance)
-        return representation
     
 class CartSerializer(serializers.ModelSerializer):
     items = CartItemSerializer(many=True, read_only=True)
     user_detail = UserSerializer(read_only=True,source='user')
+    total_items = serializers.SerializerMethodField(method_name='total_products')
     class Meta:
         model = Cart
         fields = ('id', 'user', 'user_detail','total_items',  'items')
@@ -75,6 +69,16 @@ class CartSerializer(serializers.ModelSerializer):
         for item in cart.items.all():
             total += item.presentation.price * item.quantity
         return total
+    
+    def total_products(self,cart:Cart):
+        """
+        Calcula el total de items en el carrito.
+        """
+        total = 0
+        for item in cart.items.all():
+            total += item.quantity
+        return total
+    
     def to_representation(self, instance: Cart):
         """
         Serializa el objeto Cart.
