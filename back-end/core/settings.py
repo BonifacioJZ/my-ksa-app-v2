@@ -45,6 +45,8 @@ LOCAL_APPS = [
     'src.user',
     'src.product',
     'src.cart',
+    'src.client',
+    'src.sale',
 ]
 THIRTY_PARTY = [
     'rest_framework',
@@ -122,11 +124,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es-latam'
 
-TIME_ZONE = 'UTC'
+USE_TZ = True
+
+TIME_ZONE = "America/Mexico_City"
 
 USE_I18N = True
-
-USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
