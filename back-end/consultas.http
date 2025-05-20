@@ -53,4 +53,23 @@ DELETE {{base_url}}cart/clean/
 Content-Type: application/json
 Authorization: Bearer {{token}}
 ###
+##clients
+POST {{base_url}}client/
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Generico",
+    "last_name": "Generico",
+    "phone": "123456789"
+}
+###
+GET {{base_url}}client/
+Content-Type: application/json
+Authorization: Bearer {{token}}
+###
+GET {{base_url}}client/generico-873b2719/
+Content-Type: application/json
+Authorization: Bearer {{token}}
+###
 
