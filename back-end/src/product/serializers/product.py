@@ -4,10 +4,19 @@ from ..models.category import Category
 from ..models.presentation import Presentation
 
 class PresentationProductSerializer(serializers.ModelSerializer):
+    
+    full_name = serializers.SerializerMethodField(read_only=True, method_name='get_full_name')
     class Meta:
         model = Presentation
-        fields = ('id', 'sku', 'name', 'stock', 'product', 'price',)
+        fields = ('id', 'sku', 'full_name', 'stock', 'product', 'price',)
         read_only_fields = ('id',)
+
+    def get_full_name(self, presentation: Presentation):
+        """
+        Obtiene el nombre completo de la presentación del producto.
+        """
+        return f"{presentation.product.name} - {presentation.name} ({presentation.sku})"
+        
 class CategoryProductSerializer(serializers.ModelSerializer):
     """
     Serializador para la categoría de un producto.

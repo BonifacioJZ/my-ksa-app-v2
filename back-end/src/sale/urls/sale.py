@@ -16,11 +16,8 @@ Including another URLconf
 """
 
 from django.urls import path, include
-from ..views.presentation import PresentationCreateListView,PresentationRetrieveView,PresentationUpdateView,PresentationDeleteView
+from ..views.sale import SaleListCreateView,SaleRetrieveView
 urlpatterns = [
-    path('', PresentationCreateListView.as_view(), name='presentation-list-create'),
-    path('<slug:slug>/', PresentationRetrieveView.as_view(), name='presentation-detail'),
-    path('<slug:slug>/update/', PresentationUpdateView.as_view(), name='presentation-update'),
-    path('<str:pk>/delete/', PresentationDeleteView.as_view(), name='presentation-delete'),
-    
+    path('',SaleListCreateView.as_view(),name='sales-list-create'),
+    path('<str:folio>/', SaleRetrieveView.as_view(), name='sales-detail'),
 ]

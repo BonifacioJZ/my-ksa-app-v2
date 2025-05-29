@@ -1,5 +1,5 @@
 @hostname = 127.0.0.1
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ4MDMwMzMxLCJpYXQiOjE3NDc0MjU1MzEsImp0aSI6IjY0ZTVkZGExNTQ3NDRlNWZhMWI4YzIzMzRlYTdlNDFjIiwidXNlcl9pZCI6ImJiMDQ2YjgzLWFlY2YtNGM0NC1hZGUwLTIyNjNhNWQzZTkzZSJ9.2BfzRmXEmyRv69qI-sWly4NIpaqJVsRq86uaIDJLt9Q
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ4OTg0NzkxLCJpYXQiOjE3NDgzNzk5OTEsImp0aSI6ImU5NTEyNTA1YzMwYjQ3MmY4YjgxMzNkODNlNWI5N2Y2IiwidXNlcl9pZCI6ImJiMDQ2YjgzLWFlY2YtNGM0NC1hZGUwLTIyNjNhNWQzZTkzZSJ9.TmwSDcwneeKo6iN0KXqjT3nnAtrH3iuBGFTPt-1Q4jo
 @refresh_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MDAxNzUzMSwiaWF0IjoxNzQ3NDI1NTMxLCJqdGkiOiJiNjUyYjQ1ZGQxOTU0N2FjODQzMDRlNTEyYTE4NWFmZCIsInVzZXJfaWQiOiJiYjA0NmI4My1hZWNmLTRjNDQtYWRlMC0yMjYzYTVkM2U5M2UifQ.m87iVzeFvCDXsAZ6HrdVRScOBe6CLO5nqb8w7r80XnU
 @username = Bonifacio
 @password = Ghost6699
@@ -72,4 +72,22 @@ GET {{base_url}}client/generico-873b2719/
 Content-Type: application/json
 Authorization: Bearer {{token}}
 ###
+POST  {{base_url}}sale/
+Content-Type: application/json
+Authorization: Bearer {{token}}
 
+{
+    "client": "b84e80b7-a54a-41e8-857d-b5b8722eeaba",
+    "status":"paid",
+    "pay":50.00,
+    "change":38.00
+}
+###
+GET {{base_url}}sale/
+Content-Type: application/json
+Authorization: Bearer {{token}}
+###
+GET {{base_url}}sale/20250529-VZV8E/
+Content-Type: application/json
+Authorization: Bearer {{token}}
+###

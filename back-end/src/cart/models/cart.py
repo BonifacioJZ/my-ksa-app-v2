@@ -18,6 +18,12 @@ class Cart(models.Model):
     def __str__(self):
         return f"Carrito de {self.user.username} - {self.id}"
     
+    def get_total(self):
+        total = 0
+        for item in self.items.all():
+            total += item.presentation.price * item.quantity
+        return total
+    
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, related_name='items', on_delete=models.CASCADE)
     presentation = models.ForeignKey(Presentation,related_name="presentation",on_delete=models.CASCADE)
@@ -32,3 +38,9 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f"Item en el carrito de {self.cart.user.username} - {self.quantity} unidades de {self.presentation.name}"
+    
+    def get_subtotal(self):
+        return self.presentation.price * self.quantity
+    @property
+    def subtotal(self):
+        return self.get_subtotal()
