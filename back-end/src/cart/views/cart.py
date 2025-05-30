@@ -37,6 +37,9 @@ class AddToCartView(generics.GenericAPIView):
             presentation = Presentation.objects.get(id=presentation_id)
         except Presentation.DoesNotExist:
             return Response({"detail": "Producto no encontrado."}, status=status.HTTP_404_NOT_FOUND)
+        if presentation.stock < quantity:
+            return Response({"detail": "Cantidad solicitada no disponible en stock."}, status=status.HTTP_400_BAD_REQUEST)
+        
         item,created = CartItem.objects.get_or_create(cart=cart,presentation=presentation)
         if not created:
             item.quantity += quantity

@@ -41,8 +41,8 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "presentation": "14ed786b-5226-4b75-bbb3-9cd137af4ba5",
-    "quantity": 0.5
+    "presentation": "027601b5-990b-43c3-a870-2fba71c3cb46",
+    "quantity": 5
 }
 ###
 DELETE {{base_url}}cart/remove/2/
@@ -79,15 +79,15 @@ Authorization: Bearer {{token}}
 {
     "client": "b84e80b7-a54a-41e8-857d-b5b8722eeaba",
     "status":"paid",
-    "pay":50.00,
-    "change":38.00
+    "pay":500.00,
+    "change":125.00
 }
 ###
 GET {{base_url}}sale/
 Content-Type: application/json
 Authorization: Bearer {{token}}
 ###
-GET {{base_url}}sale/20250529-VZV8E/
+GET {{base_url}}sale/20250530-YKKBL/
 Content-Type: application/json
 Authorization: Bearer {{token}}
 ###
